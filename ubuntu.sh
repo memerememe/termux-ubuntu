@@ -1,5 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
-wget "https://andronixos.sfo2.cdn.digitaloceanspaces.com/OS-Files/setup-audio.sh" && chmod +x setup-audio.sh && ./setup-audio.sh
+#!//bin/bash
 
 folder=ubuntu20-fs
 dlink="https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/APT"
@@ -32,7 +31,7 @@ if [ "$first" != 1 ];then
   mkdir -p "$folder"
   cd "$folder"
   echo "Decompressing Rootfs, please be patient."
-  proot --link2symlink tar -xf ${cur}/${tarball} --exclude=dev||:
+  proot tar -xf ${cur}/${tarball} --exclude=dev||:
   cd "$cur"
 fi
 mkdir -p ubuntu20-binds
@@ -41,11 +40,8 @@ echo "writing launch script"
 cat > $bin <<- EOM
 #!/bin/bash
 cd \$(dirname \$0)
-pulseaudio -k >> /dev/null 2>&1
-pulseaudio --start >> /dev/null 2>&1
 unset LD_PRELOAD
 command="proot"
-command+=" --link2symlink"
 command+=" -0"
 command+=" -r $folder"
 if [ -n "\$(ls -A ubuntu20-binds)" ]; then
