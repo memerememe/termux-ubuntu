@@ -102,8 +102,7 @@ chmod +x ubuntu20-fs/usr/local/bin/vncpasswd
 chmod +x ubuntu20-fs/usr/local/bin/vncserver-start
 chmod +x ubuntu20-fs/usr/local/bin/vncserver-stop
 
-echo "fixing shebang of $bin"
-termux-fix-shebang $bin
+
 echo "making $bin executable"
 chmod +x $bin
 echo "removing image for some space"
